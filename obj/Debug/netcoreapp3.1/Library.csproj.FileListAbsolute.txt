@@ -91,3 +91,5 @@ C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Library.pdb
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Library.genruntimeconfig.cache
 C:\Programowanie\Library\bin\Debug\netcoreapp3.1\Humanizer.dll
 C:\Programowanie\Library\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs

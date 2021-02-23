@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Library.Data;
 using Microsoft.EntityFrameworkCore;
+using Library.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace Library
 {
@@ -26,9 +28,17 @@ namespace Library
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-           // services.AddDbContext<DbConnection>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnectionString")));
-
             services.AddDbContext<DBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+
+                options.SignIn.RequireConfirmedEmail = false;
+
+            }).AddEntityFrameworkStores<DBContext>();
+
+            services.AddTransient<IAuthService, AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
