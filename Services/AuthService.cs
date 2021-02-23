@@ -24,14 +24,20 @@ namespace Library.Services
             this.signInManager = signInManager;
         }
 
-        public Task Login(LoginModel model)
+        public async Task Login(LoginModel model)
         {
-            throw new NotImplementedException();
+            var user = userManager.FindByEmailAsync(model.Email);
+
+            if(user != null)
+            {
+               var res= await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+             
+            }
         }
 
-        public Task Logout()
+        public async Task Logout()
         {
-            throw new NotImplementedException();
+            await signInManager.SignOutAsync();
         }
 
         public async Task Register(RegisterModel model)

@@ -1,5 +1,6 @@
 ﻿using Library.Models;
 using Library.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,13 @@ namespace Library.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthService authService;
+        private readonly SignInManager<IdentityUser> signInManager;
 
-        public AccountController(IAuthService authService)
+        public AccountController(IAuthService authService,
+                                 SignInManager<IdentityUser> signInManager)
         {
             this.authService = authService;
+            this.signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -27,17 +31,35 @@ namespace Library.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async  Task<IActionResult> Login(LoginModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                // var res = authService.Login(model);
+                var res = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+                if(res.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                return View();
+                
+            }    
+            return View();
+        }
+
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterModel registerModel)
+        public IActionResult Register(RegisterModel registerModel)
         {
             if(ModelState.IsValid)
             {
-                await authService.Register(registerModel);
+                authService.Register(registerModel);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -46,7 +68,8 @@ namespace Library.Controllers
 
         public IActionResult Logout()
         {
-            return View();
+            authService.Logout();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
