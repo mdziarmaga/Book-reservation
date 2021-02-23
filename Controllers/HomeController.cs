@@ -1,4 +1,5 @@
 ﻿using Library.Models;
+using Library.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,19 @@ namespace Library.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBookService bookService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+                              IBookService bookService)
         {
             _logger = logger;
+            this.bookService = bookService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var booksList = bookService.GetBooks().ToList();
+            return View(booksList);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
