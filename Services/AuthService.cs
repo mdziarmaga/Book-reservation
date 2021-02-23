@@ -10,16 +10,13 @@ namespace Library.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly DBContext dbContext;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
 
-        public AuthService(DBContext dbContext,
-                          UserManager<IdentityUser> userManager,
+        public AuthService(UserManager<IdentityUser> userManager,
                           SignInManager<IdentityUser> signInManager)
 
         {
-            this.dbContext = dbContext;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
