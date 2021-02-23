@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library
 {
@@ -24,6 +26,9 @@ namespace Library
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+           // services.AddDbContext<DbConnection>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnectionString")));
+
+            services.AddDbContext<DBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
