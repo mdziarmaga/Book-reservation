@@ -16,6 +16,13 @@ namespace Library.Services
             this.dbContext = dbContext;
         }
 
+        public Book AddBook(Book book)
+        {
+            dbContext.Books.Add(book);
+            dbContext.SaveChanges();
+            return book; 
+        }
+
         public void Booking(Reservation reservation)
         {
             var book = dbContext.Reservations.FirstOrDefault(book => book.IdBook == reservation.IdBook);

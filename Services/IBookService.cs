@@ -10,5 +10,7 @@ namespace Library.Services
     {
         IQueryable<Book> GetBooks();
         void Booking(Reservation reservation);
+        Task<Book> AddBook(Book book);
+        Task<Book> EditBook(Book book);
     }
 }

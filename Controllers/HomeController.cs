@@ -36,7 +36,35 @@ namespace Library.Controllers
             return View(booksList);
         }
 
-        public IActionResult Book( int id )
+        public IActionResult AddBook()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddBook(Book book)
+        {
+            if (ModelState.IsValid)
+            {
+                bookService.AddBook(book);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(book);
+        }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id)
+        {
+       
+            return View();
+        }
+
+            public IActionResult Book( int id )
         {
 
             if (User.Identity.IsAuthenticated)

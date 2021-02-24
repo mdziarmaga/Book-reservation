@@ -1,0 +1,35 @@
+﻿@model Library.Models.Book
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="form">
+    @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Title)
+            @Html.TextBoxFor(model => model.Title)
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Author)
+            @Html.TextBoxFor(model => model.Author)
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.TextBoxFor(model => model.ReleaseDate)
+            <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description)
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Zapisz" />
+    }
+
+</div>
