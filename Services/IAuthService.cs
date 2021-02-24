@@ -11,5 +11,6 @@ namespace Library.Services
         Task Login(LoginModel model);
         Task Register(RegisterModel model);
         Task Logout();
+       // int GetUserId(string name);
     }
 }

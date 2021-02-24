@@ -38,9 +38,11 @@ namespace Library.Controllers
             {
                 // var res = authService.Login(model);
                 var res = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-
+              //  var id = authService.GetUserId();
+              
                 if(res.Succeeded)
                 {
+                 
                     return RedirectToAction("Index", "Home");
                 }
                 return View();

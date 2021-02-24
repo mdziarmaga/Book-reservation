@@ -13,12 +13,13 @@
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <th> @Html.DisplayFor(model => item.Title) </th>
-                <th> @Html.DisplayFor(model => item.ReleaseDate) </th>
-                <th> @Html.DisplayFor(model => item.Author) </th>
-                <th> @Html.DisplayFor(model => item.Description) </th>
-            </tr>
+        <tr>
+            <th> @Html.DisplayFor(model => item.Title) </th>
+            <th> @Html.DisplayFor(model => item.ReleaseDate) </th>
+            <th> @Html.DisplayFor(model => item.Author) </th>
+            <th> @Html.DisplayFor(model => item.Description) </th>
+            <th> @Html.ActionLink("Rezerwuj", "Book", "Home", new { id = item.IdBook }) </th>
+          </tr>
         }
         </table>
 </div>

@@ -38,6 +38,8 @@ namespace Library
 
             }).AddEntityFrameworkStores<DBContext>();
 
+           // services.AddHttpContextAccessor();
+
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IBookService, BookService>();
         }

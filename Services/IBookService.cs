@@ -9,5 +9,6 @@ namespace Library.Services
     public interface IBookService
     {
         IQueryable<Book> GetBooks();
+        void Booking(Reservation reservation);
     }
 }
