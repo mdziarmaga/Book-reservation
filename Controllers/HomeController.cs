@@ -4,10 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Library.Controllers
@@ -41,6 +39,7 @@ namespace Library.Controllers
             return View();
         }
 
+
         [HttpPost]
         public IActionResult AddBook(Book book)
         {
@@ -52,19 +51,35 @@ namespace Library.Controllers
             return View(book);
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int? id)
         {
+            if(id != null)
+            {
+                var book = bookService.GetBookById((int)id);
+                if(book !=null)
+                {
+                    return View(book);
+                }
+            }
             return View();
         }
 
         [HttpPost]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, Book book)
         {
-       
+            if (id != 0 )
+            {
+                if(ModelState.IsValid)
+                {
+                    bookService.EditBook(id, book);
+                    return RedirectToAction("Index");
+                }
+                return View(book);
+            }
             return View();
         }
 
-            public IActionResult Book( int id )
+        public IActionResult Book( int id )
         {
 
             if (User.Identity.IsAuthenticated)
@@ -93,7 +108,31 @@ namespace Library.Controllers
 
             return View();
         }
-       
+
+        public async Task<IActionResult> Booked(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            BookReservationModel bookReservationModel = new BookReservationModel();
+            bookReservationModel.Book = bookService.GetBookByID((int)id);
+            bookReservationModel.Reservation = bookService.GetReservationById((int)id);
+            bookReservationModel.User = await bookService.GetUserByBookId((int)id);
+
+            return View(bookReservationModel);
+
+
+            //var reservations = bookService.GetReservationById((int)id);
+            //if (reservations == null)
+            //{
+            //    ViewBag.Empty = " Nie ma żadnych rezerwacji ";
+            //    return View();
+            //}
+            //return View(reservations);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
