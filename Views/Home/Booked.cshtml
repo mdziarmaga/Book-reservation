@@ -31,14 +31,13 @@
             {
                 {
                     <div class=" book">
-
-                        @Html.DisplayFor(model => user.UserName) <br />
-                        @Html.DisplayFor(model => book.Title) <br />
-                        @Html.DisplayFor(model => item.ReservationDate) <br />
+                        @if (item.IdUser == user.Id)
+                        {
+                            @Html.DisplayFor(model => user.UserName) <br />
+                            @Html.DisplayFor(model => book.Title) <br />
+                            @Html.DisplayFor(model => item.ReservationDate) <br />
+                        }
                     </div>
                 }
             }
         }
-
-
-    @*user id - @Html.DisplayFor(model => item.IdUser)*@
