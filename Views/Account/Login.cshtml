@@ -5,25 +5,34 @@
 @{
 }
 
-<div class="login-form">
+<div class="login-form text-center p-4 m-4">
     <div class="text-danger font-weight-bold">
-        @ViewData["ReservationRequirement"]
+        @ViewData["ReservationRequirement"] <br />
     </div>
 
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         <div class="form-group">
-            @Html.DisplayNameFor(item => item.Email)
-            @Html.TextBoxFor(item => item.Email)
-            <span asp-validation-for="Email" class="text-danger"></span>
+            @Html.DisplayNameFor(item => item.Email)<br />
+            @Html.TextBoxFor(item => item.Email)<br />
+            <span asp-validation-for="Email" class="text-danger font-weight-bold"></span>
         </div>
 
         <div class="form-group">
-            @Html.DisplayNameFor(item => item.Password)
-            @Html.PasswordFor(item => item.Password)
-            <span asp-validation-for="Password" class="text-danger"></span>
+            @Html.DisplayNameFor(item => item.Password)<br />
+            @Html.PasswordFor(item => item.Password)<br />
+            <span asp-validation-for="Password" class="text-danger font-weight-bold"></span>
         </div>
-        @Html.ValidationMessage("Error", new { @class = "text-danger font-weight-bold" }) <br />
-        <input type="submit" value="Zaloguj" />
+        @if (!ViewData.ModelState.IsValid)
+        { 
+            @Html.ValidationMessage("Error", new { @class = "text-danger font-weight-bold" }) <br />
+        }
+
+        <button type="submit" class="btn btn-primary"> Zaloguj się</button>
+
     }
+
+    <br /><label>Nie masz jeszcze konta ?</label><br />
+    <a href='@Url.Action("Register", "Account")' class="btn btn-outline-primary">Zarejestruj się</a>
+
 </div>

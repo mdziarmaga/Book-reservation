@@ -11,8 +11,11 @@ namespace Library.Models
     {
         [Key]
         public int IdReservation { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy }")]
         public DateTime ReservationDate { get; set; }
         [ForeignKey("IdentityUser")]
+
         public string IdUser { get; set; }
         [ForeignKey("Book")]
         public int IdBook { get; set; }
