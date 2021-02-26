@@ -13,20 +13,20 @@
         </tr>
         @foreach (var item in Model)
         {
-    <tr>
-        <th> @Html.DisplayFor(model => item.Title) </th>
-        <th> @Html.DisplayFor(model => item.ReleaseDate) </th>
-        <th> @Html.DisplayFor(model => item.Author) </th>
-        <th> @Html.DisplayFor(model => item.Description) </th>
-         <th>
-            @Html.ActionLink("Rezerwuj", "Book", "Home", new { id = item.IdBook })
-            <br />
-            @Html.ActionLink("Edytuj", "Edit", "Home", new { id = item.IdBook })
-         </th>
-         <th>
-            @Html.ActionLink("Sprawdź rezerwacje", "Booked", "Home", new { id = item.IdBook })
-         </th>
-    </tr>
+        <tr>
+            <th> @Html.DisplayFor(model => item.Title) </th>
+            <th> @Html.DisplayFor(model => item.ReleaseDate) </th>
+            <th> @Html.DisplayFor(model => item.Author) </th>
+            <th> @Html.DisplayFor(model => item.Description) </th>
+             <th>
+                @Html.ActionLink("Rezerwuj", "Book", "Home", new { id = item.IdBook })
+                <br />
+                @Html.ActionLink("Edytuj", "Edit", "Home", new { id = item.IdBook })
+             </th>
+             <th>
+                @Html.ActionLink("Sprawdź rezerwacje", "Booked", "Home", new { id = item.IdBook })
+             </th>
+        </tr>
         }
-        </table>
+    </table>
 </div>

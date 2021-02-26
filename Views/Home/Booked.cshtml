@@ -2,20 +2,31 @@
 
 @ViewBag.Empty
 
-@foreach (var item in Model.Reservation)
-    @foreach (var book in Model.Book)
-        @foreach (var user in Model.User)
-        {
-            {
+<div class="text-center" >
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th> Użytkownik </th>
+            <th> Tutuł książki </th>
+            <th> Data rezerwacji </th>
+        </tr>
+
+        @foreach (var item in Model.Reservation)
+            @foreach (var book in Model.Book)
+                @foreach (var user in Model.User)
                 {
-                    <div class=" book">
-                        @if (item.IdUser == user.Id)
+                    {
                         {
-                            @Html.DisplayFor(model => user.UserName) <br />
-                            @Html.DisplayFor(model => book.Title) <br />
-                            @Html.DisplayFor(model => item.ReservationDate) <br />
+                            @if (item.IdUser == user.Id)
+                             { 
+                                <tr>
+                                    <th> @Html.DisplayFor(model => user.UserName) </th>
+                                    <th> @Html.DisplayFor(model => book.Title) </th>
+                                    <th> @Html.DisplayFor(model => item.ReservationDate) </th>
+                                </tr>
+                             }
+                              
+                            }
                         }
-                    </div>
-                }
-            }
-        }
+                    }
+                </table>
+    </div>
