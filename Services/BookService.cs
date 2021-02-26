@@ -29,7 +29,8 @@ namespace Library.Services
 
         public void Booking(Reservation reservation)
         {
-            var book = dbContext.Reservations.FirstOrDefault(book => book.IdBook == reservation.IdBook);
+           // var book = dbContext.Reservations.FirstOrDefault(book => book.IdBook == reservation.IdBook);
+            var book = dbContext.Reservations.FirstOrDefault(item => item.IdBook == reservation.IdBook && item.IdUser == reservation.IdUser);
 
             if (book == null)
             {

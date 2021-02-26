@@ -13,12 +13,15 @@ namespace Library.Controllers
     {
         private readonly IAuthService authService;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
 
         public AccountController(IAuthService authService,
-                                 SignInManager<IdentityUser> signInManager)
+                                 SignInManager<IdentityUser> signInManager,
+                                 UserManager<IdentityUser> userManager)
         {
             this.authService = authService;
             this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
@@ -28,25 +31,34 @@ namespace Library.Controllers
 
         public IActionResult Login()
         {
+            var reservationRequirement = TempData["ReservationRequirement"];
+            if (reservationRequirement != null)
+            {
+                ViewData["ReservationRequirement"] = reservationRequirement;
+            }
+
             return View();
         }
 
         [HttpPost]
         public async  Task<IActionResult> Login(LoginModel model)
         {
-            if(ModelState.IsValid)
+         
+
+            if (ModelState.IsValid)
             {
                 // var res = authService.Login(model);
+                
                 var res = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-              //  var id = authService.GetUserId();
-              
+                           
                 if(res.Succeeded)
                 {
-                 
                     return RedirectToAction("Index", "Home");
                 }
+
+                ModelState.AddModelError("Error", "Invalid login attepmt ");
+
                 return View();
-                
             }    
             return View();
         }
@@ -55,14 +67,37 @@ namespace Library.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        public IActionResult Register(RegisterModel registerModel)
+ 
+    [HttpPost]
+        public async Task<IActionResult> Register(RegisterModel registerModel)
         {
             if(ModelState.IsValid)
             {
-                authService.Register(registerModel);
+                //authService.Register(registerModel);
 
+                var userEmail = await userManager.FindByEmailAsync(registerModel.Email);
+
+                if (userEmail != null)
+                {
+                    ModelState.AddModelError("Login", "Email exist.");
+                }
+
+                var identityUser = new IdentityUser
+                {
+                    UserName = registerModel.Email,
+                    Email = registerModel.Email
+                };
+
+                var result = await userManager.CreateAsync(identityUser, registerModel.Password);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.TryAddModelError("PasswordError", error.Description);
+                    }
+                    return View(registerModel);
+                }
                 return RedirectToAction("Index", "Home");
             }
             return View();

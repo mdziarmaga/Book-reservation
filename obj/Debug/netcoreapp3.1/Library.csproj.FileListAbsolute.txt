@@ -93,3 +93,5 @@ C:\Programowanie\Library\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.D
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Home\AddBook.cshtml.g.cs
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Home\Edit.cshtml.g.cs
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Home\Booked.cshtml.g.cs

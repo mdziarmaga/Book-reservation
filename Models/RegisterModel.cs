@@ -8,17 +8,17 @@ namespace Library.Models
 {
     public class RegisterModel
     {
-        [Required(ErrorMessage = "Pole jest wymagane")]
+        [Required(ErrorMessage = "Field is required")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Display(Name = "Hasło")]
-        [Required(ErrorMessage ="Pole jest wymagane")]
+        [Display(Name = "Hasło")]     
+        [Required(ErrorMessage = "Field is required")]
         public string Password { get; set; }
 
         [Display(Name = "Potwierdź hasło")]
-        [Compare("Password", ErrorMessage = "Hasła muszą pasować")]
-        [Required(ErrorMessage = "Pole jest wymagane")]
+        [Compare("Password", ErrorMessage = "Password not match")]
+        [Required(ErrorMessage = "Field is requirede")]
         public string ConfirmPassword { get; set; }
     }
 }

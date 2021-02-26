@@ -72,6 +72,7 @@ namespace Library.Controllers
                 if(ModelState.IsValid)
                 {
                     bookService.EditBook(id, book);
+
                     return RedirectToAction("Index");
                 }
                 return View(book);
@@ -81,7 +82,6 @@ namespace Library.Controllers
 
         public IActionResult Book( int id )
         {
-
             if (User.Identity.IsAuthenticated)
             {
                 var name = User.Identity.Name;
@@ -106,7 +106,8 @@ namespace Library.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            TempData["ReservationRequirement"] = "Sign in to reserve a book";
+            return RedirectToAction("Login", "Account");
         }
 
         public async Task<IActionResult> Booked(int? id)

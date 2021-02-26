@@ -15,44 +15,19 @@ namespace Library.Services
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
         public AuthService(UserManager<IdentityUser> userManager,
-                          SignInManager<IdentityUser> signInManager,
-                          IHttpContextAccessor httpContextAccessor)
+                          SignInManager<IdentityUser> signInManager)
 
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.httpContextAccessor = httpContextAccessor;
         }
-
-        //public int GetUserId(string name)
-        //{
-        //    var u = userManager.FindByNameAsync(name);
-        //    var userId = u.Id;
-        //    //var userId = await userManager.GetUserIdAsync(HttpContext.User);
-        //    return userId;
-
-        //  //  var user = await GetUserId();
-            
-        //    //var s = signInManager.GetExternalLoginInfoAsync()
-        //    //return user;
-        //}
-
-       // public  string GetUserId()
-       //{
-       // var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-       // var user = await userManager.FindByEmailAsync(User.Identity.Name);
-       // var userId = await userManager.GetUserIdAsync(HttpContext.User);
-       // return userId;
-       //}
 
         public async Task Login(LoginModel model)
         {
             var user = userManager.FindByEmailAsync(model.Email);
-
-            
+                        
             if(user != null)
             {
                var res= await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
@@ -67,20 +42,25 @@ namespace Library.Services
 
         public async Task Register(RegisterModel model)
         {
-            //var userEmail = await userManager.FindByEmailAsync(model.Email);
+            var userEmail = await userManager.FindByEmailAsync(model.Email);
 
+            if (userEmail != null)
+            {
+                //istenieje juz taki email
+            }
 
             var identityUser = new IdentityUser
             {
                 UserName = model.Email,
                 Email = model.Email
-            };
-
-            
+            };      
 
             var result = await userManager.CreateAsync(identityUser, model.Password);
 
+            if (result.Succeeded)
+            {
+                //success
+            }
         }
-
     }
 }

@@ -6,6 +6,10 @@
 }
 
 <div class="login-form">
+    <div class="text-danger font-weight-bold">
+        @ViewData["ReservationRequirement"]
+    </div>
+
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         <div class="form-group">
@@ -19,7 +23,7 @@
             @Html.PasswordFor(item => item.Password)
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-
+        @Html.ValidationMessage("Error", new { @class = "text-danger font-weight-bold" }) <br />
         <input type="submit" value="Zaloguj" />
     }
 </div>
