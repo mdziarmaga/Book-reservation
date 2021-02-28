@@ -43,19 +43,14 @@ namespace Library.Controllers
         [HttpPost]
         public async  Task<IActionResult> Login(LoginModel model)
         {
-         
-
             if (ModelState.IsValid)
             {
-                // var res = authService.Login(model);
-                
-                var res = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-                           
-                if(res.Succeeded)
+                var res = authService.Login(model);
+
+                if(res.Result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
                 }
-
                 ModelState.AddModelError("Error", "Invalid login attepmt ");
 
                 return View();
@@ -73,8 +68,6 @@ namespace Library.Controllers
         {
             if(ModelState.IsValid)
             {
-                //authService.Register(registerModel);
-
                 var userEmail = await userManager.FindByEmailAsync(registerModel.Email);
 
                 if (userEmail != null)
@@ -99,6 +92,14 @@ namespace Library.Controllers
                     return View(registerModel);
                 }
                 return RedirectToAction("Index", "Home");
+
+                //var res = authService.Register(registerModel);
+
+                //if (res.Result.Succeeded)
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
+                //return View();
             }
             return View();
         }

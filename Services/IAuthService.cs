@@ -1,4 +1,5 @@
 ﻿using Library.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,10 @@ namespace Library.Services
 {
     public interface IAuthService
     {
-        Task Login(LoginModel model);
-        Task Register(RegisterModel model);
+        Task<SignInResult> Login(LoginModel model);
+        //Task Register(RegisterModel model);
         Task Logout();
-       // int GetUserId(string name);
+        Task<AuthorizationResult> Register(RegisterModel model);
+        // int GetUserId(string name);
     }
 }

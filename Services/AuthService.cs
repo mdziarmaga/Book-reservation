@@ -24,15 +24,15 @@ namespace Library.Services
             this.signInManager = signInManager;
         }
 
-        public async Task Login(LoginModel model)
+        public async Task<SignInResult> Login(LoginModel model)
         {
-            var user = userManager.FindByEmailAsync(model.Email);
-                        
-            if(user != null)
+            var res = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+            if (res.Succeeded)
             {
-               var res= await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-             
+                return SignInResult.Success;
             }
+            return SignInResult.Failed;
         }
 
         public async Task Logout()
@@ -40,27 +40,35 @@ namespace Library.Services
             await signInManager.SignOutAsync();
         }
 
-        public async Task Register(RegisterModel model)
+        public async Task<AuthorizationResult> Register(RegisterModel model)
         {
+
             var userEmail = await userManager.FindByEmailAsync(model.Email);
 
             if (userEmail != null)
             {
-                //istenieje juz taki email
+                // ModelState.AddModelError("Login", "Email exist.");
+                return AuthorizationResult.Failed();         
             }
 
             var identityUser = new IdentityUser
             {
                 UserName = model.Email,
                 Email = model.Email
-            };      
+            };
 
             var result = await userManager.CreateAsync(identityUser, model.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                //success
+                //foreach (var error in result.Errors)
+                //{
+                //    ModelState.TryAddModelError("PasswordError", error.Description);
+                //}
+
+                return AuthorizationResult.Failed();      
             }
+            return AuthorizationResult.Success();
         }
     }
 }
