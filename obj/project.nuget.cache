@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yBmD6qYnx9g8/YY7TqT74r++l4aeSysv7NvbRLniismPOSiPfL+2THTc3ceUAezzrqm+9tLIn1bvJa2cdEKF1A==",
+  "dgSpecHash": "ooGXSWRUC9BHgILPaPLmiyYN6IMQy3hRKyWW+DKwYAPCTYUvZO1c/Qi3Ux4uB2n5dn8P2hdT8Q2s7G0oq0VqIA==",
   "success": true,
   "projectFilePath": "C:\\Programowanie\\Library\\Library.csproj",
   "expectedPackageFiles": [
@@ -46,6 +46,8 @@
     "C:\\Users\\Martyna\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Martyna\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Martyna\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Martyna\\.nuget\\packages\\sendgrid\\9.22.0\\sendgrid.9.22.0.nupkg.sha512",
+    "C:\\Users\\Martyna\\.nuget\\packages\\starkbank-ecdsa\\1.2.0\\starkbank-ecdsa.1.2.0.nupkg.sha512",
     "C:\\Users\\Martyna\\.nuget\\packages\\system.codedom\\4.7.0\\system.codedom.4.7.0.nupkg.sha512",
     "C:\\Users\\Martyna\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Martyna\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
