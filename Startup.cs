@@ -29,19 +29,22 @@ namespace Library
         {
             services.AddControllersWithViews();
             services.AddDbContext<DBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+           
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 5;
                 options.Password.RequireNonAlphanumeric = false;
 
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
 
-            }).AddEntityFrameworkStores<DBContext>();
+            }).AddEntityFrameworkStores<DBContext>()
+                .AddDefaultTokenProviders(); ;
 
            // services.AddHttpContextAccessor();
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IBookService, BookService>();
+            services.AddTransient<IEmailAuth, EmailAuth>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

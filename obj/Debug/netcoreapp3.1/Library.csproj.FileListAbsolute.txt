@@ -95,3 +95,6 @@ C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cs
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Home\AddBook.cshtml.g.cs
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Home\Edit.cshtml.g.cs
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Home\Booked.cshtml.g.cs
+C:\Programowanie\Library\bin\Debug\netcoreapp3.1\SendGrid.dll
+C:\Programowanie\Library\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\ConfirmEmail.cshtml.g.cs

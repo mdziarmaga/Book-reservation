@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Library.Services
 {
@@ -15,13 +16,19 @@ namespace Library.Services
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IConfiguration configuration;
+        private readonly IEmailAuth emailAuth;
 
         public AuthService(UserManager<IdentityUser> userManager,
-                          SignInManager<IdentityUser> signInManager)
+                          SignInManager<IdentityUser> signInManager,
+                          IConfiguration configuration,
+                          IEmailAuth emailAuth)
 
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.configuration = configuration;
+            this.emailAuth = emailAuth;
         }
 
         public async Task<SignInResult> Login(LoginModel model)
@@ -68,6 +75,10 @@ namespace Library.Services
 
                 return AuthorizationResult.Failed();      
             }
+            string url = $"{configuration["AppUrl"]}/ConfirmEmail?email={identityUser.Email}";
+
+            await emailAuth.SendEmailAsync(identityUser.Email, "Potwierdź email", $"<h1>Witam, proszę potwierdzić email </h1> <a href='{url}'> kliknij tutaj </a>");
+
             return AuthorizationResult.Success();
         }
 

@@ -16,6 +16,5 @@ namespace Library.Services
         Task<AuthorizationResult> Register(RegisterModel model);
         // int GetUserId(string name);
 
-        //Task ResetPassword(string email,ResetPasswordModel model);
     }
 }
