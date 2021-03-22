@@ -107,10 +107,8 @@ namespace Library.Controllers
 
                 var encodedtoken = Encoding.UTF8.GetBytes(token);
                 var validtoken = WebEncoders.Base64UrlEncode(encodedtoken);
-               // var confirmationLink = Url.Action("ConfirmEmail", "Account", new { validtoken, email = identityUser.Email });
-
-                  string confirmationLink = $"{configuration["AppUrl"]}/Account/ConfirmEmail?email={identityUser.Email}&token={validtoken}";
-
+               
+                string confirmationLink = $"{configuration["AppUrl"]}/Account/ConfirmEmail?email={identityUser.Email}&token={validtoken}";
                 await emailAuth.SendEmailAsync(identityUser.Email, "Potwierdź email", $"<h1>Witam, proszę potwierdzić email </h1> <a href='{confirmationLink}'> kliknij tutaj </a>");
 
                 return RedirectToAction("Index", "Home");
@@ -128,7 +126,6 @@ namespace Library.Controllers
 
         public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
-           //var user = await userManager.FindByIdAsync(userId);
             var user = await userManager.FindByEmailAsync(email);
             if (user != null)
             {
@@ -139,30 +136,57 @@ namespace Library.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> ConfirmEmail(string email, string token )
-        //{
-        //    var user = await userManager.FindByEmailAsync(email);
+        [HttpGet]
+        public IActionResult ForgetPassword( )
+        {
+            return View();
+        }
 
-        //    if (user != null)
-        //    {
-        //        userManager.ConfirmEmailAsync(user, token);
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordModel forgetPasswordModel)
+        {
+            if (!ModelState.IsValid)
+                return View();
 
-        //[HttpPost]
-        //public async Task<IActionResult> ConfirmEmail(string email, string token )
-        //{
-        //    var user = await  userManager.FindByEmailAsync(email);
+            var res = authService.ForgetPassword(forgetPasswordModel);
+            if(await res)
+                return RedirectToAction("ForgetPasswordConfirmation");
+            return View();
+        }
 
-        //    if(user != null)
-        //    {
-        //        userManager.ConfirmEmailAsync(user, token);
-        //    }
-        //    return View();
-        //}
-       
+        [HttpGet]
+        public IActionResult ForgetPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string token, string email) //ResetPasswordModel resetModel
+        {
+            var model = new ResetPasswordModel { Token = token, Email = email };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword( ResetPasswordModel resetModel)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = authService.ResetPassword(resetModel);
+
+            if(await result)
+                return RedirectToAction("ResetPasswordConfirmation");
+            return View();
+        }
+
+        
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+
         public IActionResult Logout()
         {
             authService.Logout();

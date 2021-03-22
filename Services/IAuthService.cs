@@ -15,6 +15,7 @@ namespace Library.Services
         Task Logout();
         Task<AuthorizationResult> Register(RegisterModel model);
         // int GetUserId(string name);
-
+        Task<bool> ForgetPassword(ForgetPasswordModel forgetPasswordModel);
+        Task<bool> ResetPassword(ResetPasswordModel resetPasswordModel);
     }
 }

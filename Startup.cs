@@ -38,9 +38,11 @@ namespace Library
                 options.SignIn.RequireConfirmedEmail = true;
 
             }).AddEntityFrameworkStores<DBContext>()
-                .AddDefaultTokenProviders(); ;
+                .AddDefaultTokenProviders(); 
 
-           // services.AddHttpContextAccessor();
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+                    opt.TokenLifespan = TimeSpan.FromMinutes(30));
+            // services.AddHttpContextAccessor();
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IBookService, BookService>();
