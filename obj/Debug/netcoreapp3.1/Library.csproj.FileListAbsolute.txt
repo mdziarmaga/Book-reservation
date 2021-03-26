@@ -102,3 +102,7 @@ C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgetPassw
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgetPasswordConfirmation.cshtml.g.cs
 C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPasswordConfirmation.cshtml.g.cs
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Administration\CreateRole.cshtml.g.cs
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Administration\ListRole.cshtml.g.cs
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditRole.cshtml.g.cs
+C:\Programowanie\Library\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditUsersInRole.cshtml.g.cs

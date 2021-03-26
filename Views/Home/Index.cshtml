@@ -21,9 +21,15 @@
             <th> @Html.DisplayFor(model => item.Author) </th>
             <th> @Html.DisplayFor(model => item.Description) </th>
              <th>
-                @Html.ActionLink("Rezerwuj", "Book", "Home", new { id = item.IdBook })
+                 @if (User.IsInRole("User"))
+                 {
+                    @Html.ActionLink("Rezerwuj", "Book", "Home", new { id = item.IdBook })
+                 }
                 <br />
-                @Html.ActionLink("Edytuj", "Edit", "Home", new { id = item.IdBook })
+                 @if (User.IsInRole("Admin"))
+                 {
+                    @Html.ActionLink("Edytuj", "Edit", "Home", new { id = item.IdBook })
+                 }
              </th>
              <th>
                 @Html.ActionLink("Sprawdź rezerwacje", "Booked", "Home", new { id = item.IdBook })

@@ -10,22 +10,22 @@
     {
         <div class="form-group">
             @Html.DisplayNameFor(model => model.Title)<br />
-            @Html.TextBoxFor(model => model.Title)<br />
+            @Html.TextBoxFor(model => model.Title,  new { style = "width:50%" })<br />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="form-group">
             @Html.DisplayNameFor(model => model.Author)<br />
-            @Html.TextBoxFor(model => model.Author)<br />
+            @Html.TextBoxFor(model => model.Author, new { style = "width:50%" })<br />
             <span asp-validation-for="Author" class="text-danger"></span>
         </div>
         <div class="form-group">
             @Html.DisplayNameFor(model => model.ReleaseDate)<br />
-            @Html.TextBoxFor(model => model.ReleaseDate)<br />
+            <input type="date" asp-for="@Model.ReleaseDate" style="width:50%" />
             <span asp-validation-for="ReleaseDate" class="text-danger"></span>
         </div>
         <div class="form-group">
             @Html.DisplayNameFor(model => model.Description)<br />
-            @Html.TextAreaFor(model => model.Description)<br />
+            <textarea asp-for="@Model.Description" style="width:50%; height:100px"> </textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <input type="submit" class="btn btn-primary" value="Dodaj" />

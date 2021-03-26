@@ -46,7 +46,8 @@ namespace Library
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IBookService, BookService>();
-            services.AddTransient<IEmailAuth, EmailAuth>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IAdministrationService, AdministrationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

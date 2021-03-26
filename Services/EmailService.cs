@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Library.Services
 {
-    public class EmailAuth : IEmailAuth
+    public class EmailService : IEmailService
     {
         private IConfiguration _configuration;
 
-        public EmailAuth(IConfiguration configuration)
+        public EmailService(IConfiguration configuration)
         {
             _configuration = configuration;
         }

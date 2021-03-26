@@ -18,13 +18,13 @@ namespace Library.Controllers
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;
         private readonly IConfiguration configuration;
-        private readonly IEmailAuth emailAuth;
+        private readonly IEmailService emailAuth;
 
         public AccountController(IAuthService authService,
                                  SignInManager<IdentityUser> signInManager,
                                  UserManager<IdentityUser> userManager,
                                  IConfiguration configuration,
-                                 IEmailAuth emailAuth)
+                                 IEmailService emailAuth)
 
         {
             this.authService = authService;
@@ -98,6 +98,17 @@ namespace Library.Controllers
                     foreach (var error in result.Errors)
                     {
                         ModelState.TryAddModelError("PasswordError", error.Description);
+                    }
+                    return View(registerModel);
+                }
+
+                var addUserToRole = await userManager.AddToRoleAsync(identityUser, "User");
+
+                if(!addUserToRole.Succeeded)
+                {
+                    foreach (var item in addUserToRole.Errors)
+                    {
+                        ModelState.TryAddModelError("RoleError", item.Description);
                     }
                     return View(registerModel);
                 }

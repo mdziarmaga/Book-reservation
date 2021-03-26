@@ -19,12 +19,12 @@ namespace Library.Services
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly IConfiguration configuration;
-        private readonly IEmailAuth emailAuth;
+        private readonly IEmailService emailAuth;
 
         public AuthService(UserManager<IdentityUser> userManager,
                           SignInManager<IdentityUser> signInManager,
                           IConfiguration configuration,
-                          IEmailAuth emailAuth)
+                          IEmailService emailAuth)
 
         {
             this.userManager = userManager;

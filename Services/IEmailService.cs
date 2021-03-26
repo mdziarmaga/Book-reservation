@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Library.Services
 {
-    public interface IEmailAuth
+    public interface IEmailService
     {
         Task SendEmailAsync(string email, string subject, string content);
     }
